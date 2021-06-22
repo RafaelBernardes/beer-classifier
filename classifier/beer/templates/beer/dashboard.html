@@ -1,7 +1,44 @@
 {% extends '../main.html' %}
 
 {% block content %}
+<div class="container text-center">
+    {% load static %}
+    <link href="{% static "css/dashboard.css" %}" rel="stylesheet" >
 
-<p>Form to enter values<p>
+    <h2 class="title" >Classificador de Cervejas</h2>
+
+    <form action="/results" method="POST">
+    {% csrf_token %}
+        <div class="container">
+            <div class="row row-cols-sm-6 ">
+                <div class=".col-auto">
+                    <label class="form-label ">IBU</label>
+                    <input type="number" class="form-control p-3 border bg-light" placeholder="Ex: 8" aria-label="IBU" name="IBU" >
+                </div>
+                <div class=".col-auto">
+                    <label class="form-label">SRM</label>
+                    <input type="number" class="form-control p-3 border bg-light" placeholder="Ex: 20" aria-label="SRM" name="SRM" >
+                </div>
+                <div class=".col-auto">
+                    <label class="form-label">OG</label>
+                    <input type="number" class="form-control p-3 border bg-light" placeholder="Ex: 1.045" aria-label="OG" name="OG" >
+                </div>
+                <div class=".col-auto">
+                    <label class="form-label">FG</label>
+                    <input type="number" class="form-control p-3 border bg-light" placeholder="Ex: 1.008" aria-label="FG" name="FG" >
+                </div>
+                <div class=".col-auto">
+                    <label class="form-label">ABV</label>
+                    <input type="number" class="form-control p-3 border bg-light" placeholder="Ex: 4.5" aria-label="ABV" name="ABV" >
+                </div>
+                <div class=".col-auto">
+                    <input class="btn btn-info p-3 btn-space" type="submit" value="Submit">
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
 
 {% endblock %}

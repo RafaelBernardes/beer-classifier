@@ -1,7 +1,6 @@
 from django.db import models
 
 # Create your models here.
-
 class Styles(models.Model):
     name = models.CharField(max_length=200)
     ibu_min = models.DecimalField(max_digits=5, decimal_places=3, null=True)
@@ -18,3 +17,5 @@ class Styles(models.Model):
 
     def __str__(self):
         return self.name
+
+    objects = models.Manager()
