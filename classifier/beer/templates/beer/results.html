@@ -2,6 +2,59 @@
 
 {% block content %}
 
-{{ results }}
+
+<div id="chart" style="width: 100vw;height:55vh;margin: auto"></div>
+
+
+{% load static %}
+<script src="{% static "js/echarts.js" %}"></script>
+
+<script type="text/javascript">
+    const results = {{ results|safe }}
+
+    const myChart = echarts.init(document.getElementById('chart'));
+
+    const option = {
+        title: {
+            text: 'Resultados obtidos',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            
+                type: 'shadow'        
+            },
+            formatter: function (params) {
+                const style = params[0];
+                return style.axisValueLabel + '<br/>' + (style.data) + '%';
+            }
+        },
+        xAxis: {
+            type: 'category',
+            data: results.map(item => item.subCategory),
+            axisLabel: {
+                interval: 0,
+                rotate: -40
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}%'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        series: [{
+            data: results.map(item => item.probability * 100),
+            type: 'bar'
+        }]
+    }
+    myChart.setOption(option);
+</script>
 
 {% endblock %}

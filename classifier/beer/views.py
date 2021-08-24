@@ -9,7 +9,7 @@ def home(request):
     return render(request, 'beer/dashboard.html')
 
 def results(request):
-    context = {}
+    
     form = BeerForm(request.POST)
     ibu = form.data['IBU']
     srm = form.data['SRM']
@@ -33,7 +33,7 @@ def results(request):
     
     # Get Possible Classes and its Proabilities and Frequencies
     # Run -> myBeer.getPossibilities(True) to get JSON Response
-    context['results'] = myBeer.getPossibilities(True)
+    context = {'results' : myBeer.getPossibilities(True)}
 
     return render(request, 'beer/results.html', context)
     
